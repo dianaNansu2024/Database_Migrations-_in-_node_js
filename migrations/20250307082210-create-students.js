@@ -6,7 +6,7 @@ module.exports = {
       await queryInterface.createTable("Students", {
           id: {
               type: Sequelize.INTEGER,
-              autoIncrement: true,
+              autoIncrement: true, // Fixed typo
               primaryKey: true,
               allowNull: false
           },
@@ -33,12 +33,3 @@ module.exports = {
       await queryInterface.dropTable("Students");
   }
 };
-
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  
-
