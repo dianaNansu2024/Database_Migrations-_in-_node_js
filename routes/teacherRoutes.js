@@ -1,46 +1,46 @@
 const express = require("express");
 const router = express.Router();
-const { Assignment } = require("../models");
+const { Teacher } = require("../models");
 
-// Create an assignment
-router.post("/assignments", async (req, res) => {
+// Create a teacher
+router.post("/teachers", async (req, res) => {
     try {
-        const assignment = await Assignment.create(req.body);
-        res.status(201).json(assignment);
+        const teacher = await Teacher.create(req.body);
+        res.status(201).json(teacher);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
 
-// Get all assignments
-router.get("/assignments", async (req, res) => {
+// Get all teachers
+router.get("/teachers", async (req, res) => {
     try {
-        const assignments = await Assignment.findAll();
-        res.json(assignments);
+        const teachers = await Teacher.findAll();
+        res.json(teachers);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// Get assignment by ID
-router.get("/assignments/:id", async (req, res) => {
+// Get teacher by ID
+router.get("/teachers/:id", async (req, res) => {
     try {
-        const assignment = await Assignment.findByPk(req.params.id);
-        if (!assignment) {
-            return res.status(404).json({ error: "Assignment not found" });
+        const teacher = await Teacher.findByPk(req.params.id);
+        if (!teacher) {
+            return res.status(404).json({ error: "Teacher not found" });
         }
-        res.json(assignment);
+        res.json(teacher);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// Update assignment
-router.put("/assignments/:id", async (req, res) => {
+// Update teacher
+router.put("/teachers/:id", async (req, res) => {
     try {
-        const [updated] = await Assignment.update(req.body, { where: { id: req.params.id } });
+        const [updated] = await Teacher.update(req.body, { where: { id: req.params.id } });
         if (!updated) {
-            return res.status(404).json({ error: "Assignment not found" });
+            return res.status(404).json({ error: "Teacher not found" });
         }
         res.json({ message: "Updated successfully" });
     } catch (error) {
@@ -48,12 +48,12 @@ router.put("/assignments/:id", async (req, res) => {
     }
 });
 
-// Delete assignment
-router.delete("/assignments/:id", async (req, res) => {
+// Delete teacher
+router.delete("/teachers/:id", async (req, res) => {
     try {
-        const deleted = await Assignment.destroy({ where: { id: req.params.id } });
+        const deleted = await Teacher.destroy({ where: { id: req.params.id } });
         if (!deleted) {
-            return res.status(404).json({ error: "Assignment not found" });
+            return res.status(404).json({ error: "Teacher not found" });
         }
         res.status(204).send();
     } catch (error) {
